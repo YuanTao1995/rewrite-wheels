@@ -7,6 +7,7 @@
 #include <stack>
 using namespace std;
 
+// 确定枢轴，依据枢轴将数组区间[left,right]进行划分
 int partition(vector<int> &v, int left, int right){
     int priot = v[left]; // 相当于priot取出来了
     while(left < right){
@@ -25,6 +26,7 @@ int partition(vector<int> &v, int left, int right){
     return left; // 此时left和right相同
 }
 
+// 递归实现
 void quicksort(vector<int> &v, int left, int right){
     if (left >= right){
         return;
@@ -36,7 +38,7 @@ void quicksort(vector<int> &v, int left, int right){
     }
 }
 
-// 非递归方式
+// 非递归方式，用栈来模拟递归过程
 void quicksort2(vector<int> &v, int left,int right)
 {
     if (left>=right)
@@ -62,22 +64,20 @@ void quicksort2(vector<int> &v, int left,int right)
             stk.push(priot_index + 1);//先左
             stk.push(j);//再右
         }
-
     }
-
 }
 
 int main()
 {
-    vector<int> v{3,1,4,2,6,5};
+    vector<int> v{3,1,4,2,6,5},v2(v);
     quicksort(v, 0, v.size()-1);
     cout << "递归实现：";
     for (const auto &i : v){
         cout << i << " ";
     }
-    quicksort2(v, 0, v.size()-1);
+    quicksort2(v2, 0, v.size()-1);
     cout<< endl << "非递归实现：";
-    for (const auto &i : v){
+    for (const auto &i : v2){
         cout << i << " ";
     }
     return 0;
